@@ -13,22 +13,22 @@ import MeuEstilo from "../meuestilo";
 
 const Listar = () => {
   const [loading, setLoading] = useState(true);
-  const [local, setLocal] = useState([]);
+  const [instrumento, setLocal] = useState([]);
 
   useEffect(() => {
     const subscriber = firestore
       .collection("User")
       .doc(auth.currentUser.uid)
-      .collection("Local")
+      .collection("Instrumento")
       .onSnapshot((querySnapshot) => {
-        const local = [];
+        const instrumento = [];
         querySnapshot.forEach((documentSnapshot) => {
-          local.push({
+          instrumento.push({
             ...documentSnapshot.data(),
-            key: documentSnapshot.local,
+            key: documentSnapshot.instrumento,
           });
         });
-        setLocal(local);
+        setLocal(instrumento);
         setLoading(false);
       });
 
@@ -39,20 +39,20 @@ const Listar = () => {
     return <ActivityIndicator />;
   }
 
-  const Item = ({ local }) => (
+  const Item = ({ instrumento }) => (
     <View style={MeuEstilo.item}>
-      <Text style={MeuEstilo.title}>{local}</Text>
+      <Text style={MeuEstilo.title}>{instrumento}</Text>
     </View>
   );
 
-  const renderItem = ({ item }) => <Item local={item.local} />;
+  const renderItem = ({ item }) => <Item instrumento={item.instrumento} />;
 
   return (
     <SafeAreaView style={MeuEstilo.containerlistar}>
       <FlatList
-        data={local}
+        data={instrumento}
         renderItem={renderItem}
-        keyExtractor={(item) => item.local}
+        keyExtractor={(item) => item.instrumento}
       />
     </SafeAreaView>
   );

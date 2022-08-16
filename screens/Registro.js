@@ -15,6 +15,7 @@ const Registro = () => {
   const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [cpf, setCpf] = useState("");
 
   const navigation = useNavigation();
 
@@ -44,6 +45,7 @@ const Registro = () => {
           email: email,
           // password: password,
           nome: nome,
+          cpf: cpf,
         });
         console.log("Registered with:", user.email);
       })
@@ -71,6 +73,12 @@ const Registro = () => {
           onChangeText={(text) => setPassword(text)}
           style={styles.input}
           secureTextEntry
+        />
+        <TextInput
+          placeholder="CPF"
+          value={cpf}
+          onChangeText={(text) => setCpf(text)}
+          style={styles.input}
         />
       </View>
 

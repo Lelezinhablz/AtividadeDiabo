@@ -23,17 +23,17 @@ const ListaComFiltro = () => {
     const subscriber = firestore
       .collection("User")
       .doc(auth.currentUser.uid)
-      .collection("Local")
+      .collection("Instrumento")
       .onSnapshot((querySnapshot) => {
-        const local = [];
+        const instrumento = [];
         querySnapshot.forEach((documentSnapshot) => {
-          local.push({
+          instrumento.push({
             ...documentSnapshot.data(),
-            key: documentSnapshot.local,
+            key: documentSnapshot.instrumento,
           });
         });
-        setdadosFiltrados(local);
-        setLocal(local);
+        setdadosFiltrados(instrumento);
+        setLocal(instrumento);
         setLoading(false);
       });
 
@@ -46,9 +46,9 @@ const ListaComFiltro = () => {
 
   const searchFilter = (text) => {
     if (text) {
-      const newData = local.filter(function (item) {
-        if (item.local) {
-          const itemData = item.local.toUpperCase();
+      const newData = instrumento.filter(function (item) {
+        if (item.instrumento) {
+          const itemData = item.instrumento.toUpperCase();
           const textData = text.toUpperCase();
           return itemData.indexOf(textData) > -1;
         }
@@ -56,7 +56,7 @@ const ListaComFiltro = () => {
       setdadosFiltrados(newData);
       setSearch(text);
     } else {
-      setdadosFiltrados(local);
+      setdadosFiltrados(instrumento);
       setSearch(text);
     }
   };
@@ -66,13 +66,13 @@ const ListaComFiltro = () => {
       <Text style={MeuEstilo.item} onPress={() => getItem(item)}>
         {/* {item.id}
         {' - '} */}
-        {item.local.toUpperCase()}
+        {item.instrumento.toUpperCase()}
       </Text>
     );
   };
 
   const getItem = (item) => {
-    alert("Local : " + item.local);
+    alert("Instrumento : " + item.instrumento);
   };
 
   return (
@@ -87,7 +87,7 @@ const ListaComFiltro = () => {
         />
         <FlatList
           data={dadosFiltrados}
-          keyExtractor={(item) => item.local}
+          keyExtractor={(item) => item.instrumento}
           renderItem={ItemView}
         />
       </View>

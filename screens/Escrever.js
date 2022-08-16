@@ -5,23 +5,23 @@ import MeuEstilo from '../meuestilo'
 import { auth,firestore } from '../firebase'
 
 const Escrever = () => {
-  const [local,  setLocal] = useState('')
-  const [lat,   setLat] = useState('')
-  const [long,  setLong] = useState('')
+  const [instrumento,  setInstrumento] = useState('')
+  const [marca,   setMarca] = useState('')
+  const [modelo,  setModelo] = useState('')
 
-  const ref = firestore.collection('User').doc(auth.currentUser.uid).collection('Local').doc();
+  const ref = firestore.collection('User').doc(auth.currentUser.uid).collection('Instrumento').doc();
   const enviarDados = () => {
       ref.set
       ({
 
-       local:local,
-       long:long,
-       lat:lat,
+       instrumento:instrumento,
+       marca:marca,
+       modelo:modelo,
        id: ref.id,
 
      })
      .then(() => {
-       alert('Local ' + local + ' Adicionado com Sucesso! :)')
+       alert('Instrumento ' + instrumento + ' Adicionado com Sucesso! :)')
          
      });
     
@@ -38,21 +38,21 @@ const Escrever = () => {
     >
       <View style={MeuEstilo.inputcontainerlistar}>
         <TextInput
-          placeholder="Local"
-          value={local}
-          onChangeText={text => setLocal(text)}
+          placeholder="Instrumento"
+          value={instrumento}
+          onChangeText={text => setInstrumento(text)}
           style={MeuEstilo.input}
         />
         <TextInput
-          placeholder="Long"
-          value={long}
-          onChangeText={text => setLong(text)}
+          placeholder="Modelo"
+          value={modelo}
+          onChangeText={text => setModelo(text)}
           style={MeuEstilo.input}
         />
           <TextInput
-          placeholder="Lat"
-          value={lat}
-          onChangeText={text => setLat(text)}
+          placeholder="Marca"
+          value={marca}
+          onChangeText={text => setMarca(text)}
           style={MeuEstilo.input}
         />
        
